@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/anonymousresearcher5010/osam-dgs/configs/canonical_schema.json",
+  "title": "OSAM-DGS v0.0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dataset_version",
+    "creation_date",
+    "conversations"
+  ],
+  "properties": {
+    "dataset_version": { "type": "string" },
+    "creation_date": { "type": "string", "format": "date-time" },
+    "conversations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/conversation" }
+    }
+  },
+  "$defs": {
+    "time_segment": {
+      "type": "object",
+      "required": [
+        "start_time_s",
+        "end_time_s",
+        "start_frame",
+        "end_frame"
+      ],
+      "properties": {
+        "start_time_s": { "type": "number", "minimum": 0 },
+        "end_time_s": { "type": "number", "minimum": 0 },
+        "start_frame": { "type": "integer", "minimum": 0 },
+        "end_frame": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+
+    "mouthing_or_mouth_gesture": {
+      "type": "object",
+      "required": [
+        "mouthing_token",
+        "is_regular_mouthing",
+        "is_incomplete_mouthing",
+        "is_unclear_mouthing",
+        "is_mouth_gesture",
+        "is_oral_articulation",
+        "is_sound_imitation",
+        "is_undocumented_mouthing"
+      ],
+      "properties": {
+        "mouthing_token": { "type": "string" },
+        "is_regular_mouthing": { "type": "boolean" },
+        "is_incomplete_mouthing": { "type": "boolean" },
+        "is_unclear_mouthing": { "type": "boolean" },
+        "is_mouth_gesture": { "type": "boolean" },
+        "is_oral_articulation": { "type": "boolean" },
+        "is_sound_imitation": { "type": "boolean" },
+        "is_undocumented_mouthing": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+
+    "gloss": {
+      "type": "object",
+      "required": [
+        "gloss_id",
+        "time_segment",
+        "lexical_sign",
+        "is_type",
+        "is_subtype",
+        "has_modified_from_citation_form",
+        "is_double_signing",
+        "is_second_hand_only",
+        "is_name_sign",
+        "is_city_name_sign",
+        "is_organisation_name_sign",
+        "is_unknown_regional_sign",
+        "is_bound_german_morpheme",
+        "is_foreign_sign",
+        "is_productive_sign",
+        "is_pointing_sign",
+        "is_finger_spelling",
+        "is_initialisation_sign",
+        "is_number_sign",
+        "is_list_buoy_sign",
+        "is_gesture_sign",
+        "is_mouthing_without_manual_activity",
+        "is_cued_speech",
+        "is_unclear_linguistic_manual_activity",
+        "is_extra_linguistic_manual_activity",
+        "is_articulation_sign",
+        "is_date_sign",
+        "mouthing_or_mouth_gesture"
+      ],
+      "properties": {
+        "gloss_id": { "type": "string" },
+        "time_segment": { "$ref": "#/$defs/time_segment" },
+        "lexical_sign": { "type": "string" },
+        "is_type": { "type": "boolean" },
+        "is_subtype": { "type": "boolean" },
+        "has_modified_from_citation_form": { "type": "boolean" },
+        "is_double_signing": { "type": "boolean" },
+        "is_second_hand_only": { "type": "boolean" },
+        "is_name_sign": { "type": "boolean" },
+        "is_city_name_sign": { "type": "boolean" },
+        "is_organisation_name_sign": { "type": "boolean" },
+        "is_unknown_regional_sign": { "type": "boolean" },
+        "is_bound_german_morpheme": { "type": "boolean" },
+        "is_foreign_sign": { "type": "boolean" },
+        "is_productive_sign": { "type": "boolean" },
+        "is_pointing_sign": { "type": "boolean" },
+        "is_finger_spelling": { "type": "boolean" },
+        "is_initialisation_sign": { "type": "boolean" },
+        "is_number_sign": { "type": "boolean" },
+        "is_list_buoy_sign": { "type": "boolean" },
+        "is_gesture_sign": { "type": "boolean" },
+        "is_mouthing_without_manual_activity": { "type": "boolean" },
+        "is_cued_speech": { "type": "boolean" },
+        "is_unclear_linguistic_manual_activity": { "type": "boolean" },
+        "is_extra_linguistic_manual_activity": { "type": "boolean" },
+        "is_articulation_sign": { "type": "boolean" },
+        "is_date_sign": { "type": "boolean" },
+        "mouthing_or_mouth_gesture": {
+          "anyOf": [
+            { "$ref": "#/$defs/mouthing_or_mouth_gesture" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "sentence": {
+      "type": "object",
+      "required": [
+        "sentence_id",
+        "time_segment",
+        "german_translation",
+        "back_translations",
+        "glosses"
+      ],
+      "properties": {
+        "sentence_id": { "type": "string" },
+        "time_segment": { "$ref": "#/$defs/time_segment" },
+        "german_translation": { "type": "string" },
+        "back_translations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "glosses": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/gloss" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "turn": {
+      "type": "object",
+      "required": [
+        "turn_id",
+        "time_segment",
+        "speaker",
+        "moderation_sentences_german_translation",
+        "sentences"
+      ],
+      "properties": {
+        "turn_id": { "type": "string" },
+        "time_segment": { "$ref": "#/$defs/time_segment" },
+        "speaker": {
+          "type": "string",
+          "enum": ["A", "B"]
+        },
+        "moderation_sentences_german_translation": {
+          "type": ["array", "null"],
+          "items": { "type": "string" }
+        },
+        "sentences": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sentence" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "conversation": {
+      "type": "object",
+      "required": [
+        "conversation_id",
+        "video_reference_speaker_A",
+        "video_reference_speaker_B",
+        "openpose_reference",
+        "video_reference_AB",
+        "video_reference_long_shot",
+        "fps",
+        "conversation_topics",
+        "conversation_format",
+        "conversation_age_group",
+        "turns",
+        "time_segment"
+      ],
+      "properties": {
+        "conversation_id": { "type": "string" },
+        "video_reference_speaker_A": { "type": ["string", "null"] },
+        "video_reference_speaker_B": { "type": ["string", "null"] },
+        "openpose_reference": { "type": ["string", "null"] },
+        "video_reference_AB": { "type": ["string", "null"] },
+        "video_reference_long_shot": { "type": ["string", "null"] },
+        "fps": {
+          "type": ["integer", "null"],
+          "enum": [50, null]
+        },
+        "conversation_topics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "conversation_format": { "type": "string" },
+        "conversation_age_group": { "type": "string" },
+        "turns": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": { "$ref": "#/$defs/turn" }
+            },
+            { "type": "null" }
+          ]
+        },
+        "time_segment": {
+          "anyOf": [
+            { "$ref": "#/$defs/time_segment" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

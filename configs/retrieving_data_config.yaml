@@ -1,0 +1,29 @@
+# Folder for storing the retrieved DGS Korpus data
+data_dir: data/dgs_korpus_release_3_raw
+
+# URL of the webpage
+url: "https://www.sign-lang.uni-hamburg.de/meinedgs/ling/start-name_de.html"
+base_url: "https://www.sign-lang.uni-hamburg.de/meinedgs/ling/"
+
+# Set a limit for the number of conversations to fetch. -1 for all conversations on the page.
+max_conversations: -1
+
+# Add video data to retrieve
+retrieve_video_ab: False
+retrieve_video_long_shot: False
+
+# Ilex file to retrieve
+retrieve_ilex: True
+
+# Set if SRT files (transcriptions) are required
+SRT_required: False
+
+# Be polite and set a user agent and your email address
+user_agent: "DGS-Korpus-Retrieval/0.1 (YOUR_EMAIL_ADDRESS_HERE)"
+
+request_timeout: 30.0
+delay_seconds: 0.5
+
+# Logs
+# Set to True to overwrite existing logs on each run
+overwrite_logs: True

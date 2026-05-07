@@ -1,0 +1,11 @@
+# Folder for storing the retrieved DGS Korpus types data
+data_dir: "data/dgs_korpus_release_3_raw"
+output_file: "dgs-types.csv"
+
+# URL of the types webpage
+url: "https://www.sign-lang.uni-hamburg.de/meinedgs/ling/types_de.html"
+
+# Be polite and set a user agent and your email address
+user_agent: "DGS-Korpus-Retriever/0.1 (YOUR_EMAIL_ADDRESS_HERE)"
+
+request_timeout: 30.0
